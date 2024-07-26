@@ -6,7 +6,7 @@
    <packaging>jar</packaging>
 
    <name>external-sort</name>
-   <description>External Sort</description>
+   <description>An external sorting implementation based on Java of equal length long type</description>
    <url>https://github.com/gear-wheel-git/external-sort.git</url>
 
    <properties>
