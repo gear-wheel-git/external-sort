@@ -1,4 +1,4 @@
-package com.cogwheel.externalsort;
+package com.gearwheel.externalsort;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,13 +10,13 @@ import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
 /**
- * External sorting <br/> of equal length per row for long type <br/>
+ * External sorting <br> of equal length per row for long type <br>
  * <p color="#51D138">
  *     The output file will be preserved after sorted
- *     <br/>
+ *     <br>
  *     please del workDir if not use anymore
  * </p>
- * <br/>
+ * <br>
  * <strong>when running on my pc </strong>
  * <p>
  * 100 million data sorting: almost 150M or so memory, 14s sorting with g1gc, 63s if not, almost 7s sorting if the memory is a little more
@@ -26,7 +26,6 @@ import java.util.stream.Collectors;
  * </p>
  *
  * @author gear-wheel
- * @date 2024-07-12 11:07
  */
 public final class FastLongBaseExternalSort<H> implements AutoCloseable {
 
@@ -94,6 +93,7 @@ public final class FastLongBaseExternalSort<H> implements AutoCloseable {
 
     /**
      * Estimated memory size required
+     * @return bytes
      */
     public long memorySize() {
         return diskLineNum * (8L * head.size() + 16 + 4) + 40;
@@ -190,6 +190,7 @@ public final class FastLongBaseExternalSort<H> implements AutoCloseable {
      * <p>
      *     because sorting occurs during insertion, this method cannot guarantee that the order is consistent with insertion.
      * </p>
+     * @param action consumer
      */
     public void forEachForTest(Consumer<List<Long>> action) {
         sortAndFlush(false);

@@ -1,4 +1,4 @@
-package com.cogwheel.externalsort;
+package com.gearwheel.externalsort;
 
 
 import java.io.File;
@@ -16,7 +16,6 @@ import java.util.List;
 import java.util.function.Consumer;
 
 /**
- * com.zx.externalsort.LongBaseStorage
  *
  * @author gear-wheel
  * @date 2024-07-15 10:12

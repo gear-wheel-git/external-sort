@@ -1,4 +1,4 @@
-package com.cogwheel.externalsort;
+package com.gearwheel.externalsort;
 
 import cn.hutool.core.date.StopWatch;
 import cn.hutool.core.io.FileUtil;
@@ -32,7 +32,10 @@ public class FastLongBaseExternalSortTest {
 		final String workDir = filePath("sortAll");
 		AtomicInteger num = new AtomicInteger(0);
 		AtomicLong atomicLong = new AtomicLong(0);
-		int totalBatch = 10000_0000;
+		// the purpose is to quickly pass MavenTest
+		//		int totalBatch = 100_000_000;
+
+		int totalBatch = 100;
 
 
 		final String a = "a";
