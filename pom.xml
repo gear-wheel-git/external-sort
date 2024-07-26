@@ -10,6 +10,13 @@
    <description>An external sorting implementation based on Java of equal length long type</description>
    <url>https://github.com/gear-wheel-git/external-sort.git</url>
 
+   <licenses>
+      <license>
+         <name>New BSD License</name>
+         <url>https://opensource.org/license/BSD-3-Clause</url>
+      </license>
+   </licenses>
+
    <issueManagement>
       <system>GitHub</system>
       <url>https://github.com/gear-wheel-git/external-sort/issues</url>
@@ -23,6 +30,14 @@
       <tag>0.1.1</tag>
    </scm>
 
+   <developers>
+      <developer>
+         <id>io.github.gear-wheel-git</id>
+         <name>gear-wheel-git</name>
+         <email>gear-wheel-git@proton.me</email>
+         <url>https://github.com/gear-wheel-git</url>
+      </developer>
+   </developers>
 
    <properties>
       <maven.compiler.source>8</maven.compiler.source>
