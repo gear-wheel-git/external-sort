@@ -1,13 +1,28 @@
-<project>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
    <modelVersion>4.0.0</modelVersion>
-   <groupId>root</groupId>
-   <version>1.0</version>
-   <artifactId>project</artifactId>
+   <groupId>io.github.gear-wheel-git</groupId>
+   <artifactId>external-sort</artifactId>
+   <version>0.1.1</version>
    <packaging>jar</packaging>
 
    <name>external-sort</name>
    <description>An external sorting implementation based on Java of equal length long type</description>
    <url>https://github.com/gear-wheel-git/external-sort.git</url>
+
+   <issueManagement>
+      <system>GitHub</system>
+      <url>https://github.com/gear-wheel-git/external-sort/issues</url>
+   </issueManagement>
+
+
+   <scm>
+      <connection>scm:git:git://github.com/gear-wheel-git/external-sort.git</connection>
+      <developerConnection>scm:git:git@github.com:gear-wheel-git/external-sort.git</developerConnection>
+      <url>https://github.com/gear-wheel-git/external-sort</url>
+      <tag>0.1.1</tag>
+   </scm>
+
 
    <properties>
       <maven.compiler.source>8</maven.compiler.source>
@@ -16,6 +31,10 @@
       <slf4j-api.version>1.7.26</slf4j-api.version>
       <logback.version>1.2.13</logback.version>
    </properties>
+
+
+
+
    <dependencies>
       <dependency>
          <groupId>org.slf4j</groupId>
@@ -27,8 +46,8 @@
          <groupId>junit</groupId>
          <artifactId>junit</artifactId>
          <version>4.13.1</version>
+         <scope>test</scope>
       </dependency>
-
 
       <dependency>
          <groupId>cn.hutool</groupId>
@@ -52,4 +71,64 @@
       </dependency>
 
    </dependencies>
+
+   <profiles>
+      <profile>
+         <id>release</id>
+         <build>
+            <plugins>
+               <plugin>
+                  <groupId>org.apache.maven.plugins</groupId>
+                  <artifactId>maven-gpg-plugin</artifactId>
+                  <version>1.6</version>
+                  <executions>
+                     <execution>
+                        <id>sign-artifacts</id>
+                        <phase>verify</phase>
+                        <goals>
+                           <goal>sign</goal>
+                        </goals>
+                     </execution>
+                  </executions>
+                  <configuration>
+                     <executable>C:\Program Files (x86)\GnuPG\bin\gpg.exe</executable>
+                  </configuration>
+               </plugin>
+               <plugin>
+                  <groupId>org.apache.maven.plugins</groupId>
+                  <artifactId>maven-javadoc-plugin</artifactId>
+                  <version>2.10.4</version>
+                  <configuration>
+                     <source>${maven.compiler.source}</source>
+                     <additionalparam>-Xdoclint:none</additionalparam>
+                  </configuration>
+                  <executions>
+                     <execution>
+                        <id>attach-javadocs</id>
+                        <goals>
+                           <goal>jar</goal>
+                        </goals>
+                     </execution>
+                  </executions>
+               </plugin>
+               <plugin>
+                  <groupId>org.apache.maven.plugins</groupId>
+                  <artifactId>maven-source-plugin</artifactId>
+                  <version>3.0.1</version>
+                  <executions>
+                     <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                           <goal>jar</goal>
+                        </goals>
+                     </execution>
+                  </executions>
+               </plugin>
+            </plugins>
+         </build>
+
+      </profile>
+   </profiles>
+
+
 </project>
