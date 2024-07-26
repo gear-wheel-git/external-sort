@@ -1,0 +1,55 @@
+<project>
+   <modelVersion>4.0.0</modelVersion>
+   <groupId>root</groupId>
+   <version>1.0</version>
+   <artifactId>project</artifactId>
+   <packaging>jar</packaging>
+
+   <name>external-sort</name>
+   <description>External Sort</description>
+   <url>https://github.com/gear-wheel-git/external-sort.git</url>
+
+   <properties>
+      <maven.compiler.source>8</maven.compiler.source>
+      <maven.compiler.target>8</maven.compiler.target>
+      <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+      <slf4j-api.version>1.7.26</slf4j-api.version>
+      <logback.version>1.2.13</logback.version>
+   </properties>
+   <dependencies>
+      <dependency>
+         <groupId>org.slf4j</groupId>
+         <artifactId>slf4j-api</artifactId>
+         <version>${slf4j-api.version}</version>
+      </dependency>
+
+      <dependency>
+         <groupId>junit</groupId>
+         <artifactId>junit</artifactId>
+         <version>4.13.1</version>
+      </dependency>
+
+
+      <dependency>
+         <groupId>cn.hutool</groupId>
+         <artifactId>hutool-all</artifactId>
+         <version>5.8.26</version>
+         <scope>test</scope>
+      </dependency>
+
+      <dependency>
+         <groupId>ch.qos.logback</groupId>
+         <artifactId>logback-classic</artifactId>
+         <version>${logback.version}</version>
+         <scope>test</scope>
+      </dependency>
+
+      <dependency>
+         <groupId>ch.qos.logback</groupId>
+         <artifactId>logback-core</artifactId>
+         <version>${logback.version}</version>
+         <scope>test</scope>
+      </dependency>
+
+   </dependencies>
+</project>
