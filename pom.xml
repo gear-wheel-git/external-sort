@@ -159,7 +159,7 @@
       <repository>
          <id>github</id>
          <name>GitHub maven package test</name>
-         <url>https://github.com/gear-wheel-git/external-sort</url>
+         <url>https://maven.pkg.github.com/gear-wheel-git/external-sort</url>
       </repository>
    </distributionManagement>
 </project>
