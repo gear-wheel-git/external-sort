@@ -45,6 +45,7 @@
       <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
       <slf4j-api.version>1.7.26</slf4j-api.version>
       <logback.version>1.2.13</logback.version>
+      <jmh.version>1.35</jmh.version>
    </properties>
 
 
@@ -85,6 +86,18 @@
          <scope>test</scope>
       </dependency>
 
+      <dependency>
+         <groupId>org.openjdk.jmh</groupId>
+         <artifactId>jmh-core</artifactId>
+         <version>${jmh.version}</version>
+         <scope>test</scope>
+      </dependency>
+      <dependency>
+         <groupId>org.openjdk.jmh</groupId>
+         <artifactId>jmh-generator-annprocess</artifactId>
+         <version>${jmh.version}</version>
+         <scope>test</scope>
+      </dependency>
    </dependencies>
 
    <profiles>
@@ -147,6 +160,23 @@
                   <configuration>
                      <publishingServerId>wheel</publishingServerId>
                      <tokenAuth>true</tokenAuth>
+                  </configuration>
+               </plugin>
+               <plugin>
+                  <groupId>org.apache.maven.plugins</groupId>
+                  <artifactId>maven-compiler-plugin</artifactId>
+                  <version>3.8.1</version>
+                  <configuration>
+                     <source>1.8</source>
+                     <target>1.8</target>
+                     <encoding>UTF-8</encoding>
+                     <annotationProcessorPaths>
+                        <path>
+                           <groupId>org.openjdk.jmh</groupId>
+                           <artifactId>jmh-generator-annprocess</artifactId>
+                           <version>${jmh.version}</version>
+                        </path>
+                     </annotationProcessorPaths>
                   </configuration>
                </plugin>
             </plugins>

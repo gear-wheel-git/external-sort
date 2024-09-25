@@ -27,9 +27,10 @@ import java.util.stream.Collectors;
  *
  * @author gear-wheel
  */
-public final class FastLongBaseExternalSort<Head> implements AutoCloseable {
+@Deprecated
+public final class UsingListFastLongBaseExternalSort<Head> implements AutoCloseable {
 
-    private static final Logger log = LoggerFactory.getLogger(FastLongBaseExternalSort.class);
+    private static final Logger log = LoggerFactory.getLogger(UsingListFastLongBaseExternalSort.class);
 
     private final Map<Head, Integer> head;
 
@@ -42,16 +43,16 @@ public final class FastLongBaseExternalSort<Head> implements AutoCloseable {
 
 
     /**
-     * 
+     *
      * @param workdir  this directory  should be empty
-     * @param heads just use for append content to get idx of line 
+     * @param heads just use for append content to get idx of line
      * @param comparator comparator of line content
      * @param segmentSizeBytes determine how large disk file blocks are created and how much content is read into memory
      */
-    public FastLongBaseExternalSort(File workdir,
-                                    Collection<Head> heads,
-                                    Comparator<long[]> comparator,
-                                    int segmentSizeBytes) {
+    public UsingListFastLongBaseExternalSort(File workdir,
+                                             Collection<Head> heads,
+                                             Comparator<long[]> comparator,
+                                             int segmentSizeBytes) {
         if (workdir == null || !workdir.isDirectory()) {
             throw new IllegalArgumentException("input File object is not a directory");
         }
@@ -72,16 +73,23 @@ public final class FastLongBaseExternalSort<Head> implements AutoCloseable {
      * @param action    consumer
      * @throws Exception ex
      */
-    public static void forEachSorted(File directory, int headSize, Consumer<long[]> action) throws Exception {
+    public static void forEachSorted(File directory, int headSize, Consumer<List<Long>> action) throws Exception {
         try (LongBaseStorage longBaseStorage = new LongBaseStorage(directory, "out", 0, true)) {
             doForEach(longBaseStorage, headSize, action);
         }
     }
 
-    private static void doForEach(LongBaseStorage storage, int lineSize, Consumer<long[]> action) {
+    private static void doForEach(LongBaseStorage storage, int lineSize, Consumer<List<Long>> action) {
         Objects.requireNonNull(action);
 
-        storage.forEach(lineSize, action);
+        List<Long> list = new ArrayList<>(lineSize);
+        storage.forEach(l -> {
+            list.add(l);
+            if (list.size() >= lineSize) {
+                action.accept(list);
+                list.clear();
+            }
+        });
     }
 
     /**
@@ -185,13 +193,13 @@ public final class FastLongBaseExternalSort<Head> implements AutoCloseable {
      * </p>
      * @param action consumer
      */
-    public void forEachForTest(Consumer<long[]> action) {
+    public void forEachForTest(Consumer<List<Long>> action) {
         sortAndFlush(false);
 
         doForEach(in, head.size(), action);
     }
 
-    public void forEachSorted(Consumer<long[]> action) {
+    public void forEachSorted(Consumer<List<Long>> action) {
         
         if (out == null) {
             throw new RuntimeException(" please use sortAll first !");
